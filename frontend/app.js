@@ -2,10 +2,21 @@ let cart = [];
 let products = {};
 const backend = "/api";
 
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+
 async function loadProducts(){
     const res = await fetch(backend+"/products");
     products = await res.json();
     const container = document.getElementById("products");
+    container.innerHTML = "";
 
     Object.keys(products).forEach(id=>{
         const p = products[id];
@@ -21,8 +32,15 @@ async function loadProducts(){
 
 function addToCart(id){
     const item = cart.find(p=>p.id===id);
-    if(item){item.qty++}else{cart.push({id,qty:1})}
+
+    if(item){
+        item.qty++;
+    } else {
+        cart.push({id:id, qty:1});
+    }
+
     updateCartUI();
+    showToast("✅ Item added to cart");
 }
 
 function updateCartUI(){
@@ -37,7 +55,11 @@ function updateCartUI(){
         const product=products[item.id];
         total+=product.price*item.qty;
         count+=item.qty;
-        cartItems.innerHTML+=`${product.name} x ${item.qty}<br>`;
+
+        cartItems.innerHTML+=`
+        <div>
+            ${product.name} x ${item.qty}
+        </div>`;
     });
 
     cartTotal.innerText=total;
@@ -50,9 +72,14 @@ function toggleCart(){
 }
 
 async function checkout(){
-    const name=cust_name.value;
-    const email=cust_email.value;
-    const address=cust_address.value;
+    const name=document.getElementById("cust_name").value;
+    const email=document.getElementById("cust_email").value;
+    const address=document.getElementById("cust_address").value;
+
+    if(!name || !email || cart.length===0){
+        showToast("⚠ Fill delivery details & add items");
+        return;
+    }
 
     const res=await fetch(backend+"/create-checkout-session",{
         method:"POST",
