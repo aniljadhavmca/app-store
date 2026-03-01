@@ -13,6 +13,22 @@ A production-style mini eCommerce system built using:
 
 ---
 
+## 🛍 Store Homepage
+
+![Store Home](https://raw.githubusercontent.com/aniljadhavmca/app-store/main/images/store-1.png)
+
+---
+
+## 🛒 Cart Sidebar
+
+![Cart Page](https://raw.githubusercontent.com/aniljadhavmca/app-store/main/images/store-cart1.png)
+
+---
+
+## 💳 Stripe Payment Page
+
+![Stripe Payment](https://github.com/aniljadhavmca/app-store/blob/main/images/store-payment-getway.png)
+
 # 🏗 Architecture
 
 Internet  
@@ -22,6 +38,7 @@ Application Load Balancer (HTTP:80)
 └── /api/* → Backend EC2 (Flask :5000)  
       ↓  
      RDS MySQL  
+
 
 ---
 
