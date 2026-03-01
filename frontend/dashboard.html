@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Orders Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1>Orders Dashboard</h1>
+<div id="orders"></div>
+</div>
+
+<script>
+async function loadOrders(){
+    const res=await fetch("/api/orders");
+    const data=await res.json();
+
+    data.forEach(order=>{
+        document.getElementById("orders").innerHTML+=`
+        <div class="card">
+            <p><b>${order.customer_name}</b></p>
+            <p>${order.customer_email}</p>
+            <p>₹${order.total_amount}</p>
+            <p>${order.created_at}</p>
+        </div>`;
+    });
+}
+loadOrders();
+</script>
+</body>
+</html>
