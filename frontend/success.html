@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Receipt</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<div class="card">
+<h2>🎉 Payment Successful</h2>
+<div id="receipt"></div>
+<a href="/">Back to Store</a>
+</div>
+</div>
+
+<script>
+async function loadReceipt(){
+    const params=new URLSearchParams(window.location.search);
+    const sid=params.get("session_id");
+    const res=await fetch("/api/order/"+sid);
+    const data=await res.json();
+
+    document.getElementById("receipt").innerHTML=`
+    <p><b>Name:</b> ${data.customer_name}</p>
+    <p><b>Email:</b> ${data.customer_email}</p>
+    <p><b>Address:</b> ${data.address}</p>
+    <p><b>Total:</b> ₹${data.total_amount}</p>
+    <p><b>Date:</b> ${data.created_at}</p>`;
+}
+loadReceipt();
+</script>
+</body>
+</html>
