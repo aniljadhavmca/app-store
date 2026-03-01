@@ -18,13 +18,15 @@ CORS(app)
 # ===============================
 # 🔑 STRIPE SECRET KEY
 # ===============================
-stripe.api_key = "YOUR_STRIPE_SECRET_KEY"
+# stripe.api_key = "YOUR_STRIPE_SECRET_KEY"
 
 # ===============================
 # 🗄 RDS DATABASE CONNECTION
 # ===============================
 engine = create_engine(
-    "mysql+pymysql://admin:admin1234@YOUR_RDS_ENDPOINT:3306/storedb"
+   # "mysql+pymysql://admin:admin1234@YOUR_RDS_ENDPOINT:3306/storedb"
+   
+    "mysql+pymysql://admin:admin1234@storedb.che84cm80i8h.us-east-1.rds.amazonaws.com:3306/storedb"
 )
 
 # ===============================
@@ -96,8 +98,8 @@ def checkout():
         payment_method_types=["card"],
         line_items=line_items,
         mode="payment",
-        success_url="http://YOUR_ALB_DNS/success.html?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url="http://YOUR_ALB_DNS",
+        success_url="http://lb-938758338.us-east-1.elb.amazonaws.com/success.html?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url="http://lb-938758338.us-east-1.elb.amazonaws.com",
     )
 
     # Store Order in DB
