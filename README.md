@@ -124,6 +124,10 @@ Paste backend code and update:
 
 ## 4️⃣ Test Backend
 
+/storeapp/app.py
+
+source venv/bin/activate
+
 python app.py  
 
 You should see:
