@@ -33,28 +33,28 @@ engine = create_engine(
 PRODUCTS = {
     1: {
         "name": "Laptop",
-        "price": 50000,
-        "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800"
+        "price": 35000,
+        "image": "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=800"
     },
     2: {
         "name": "Phone",
         "price": 25000,
-        "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800"
+        "image": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=800"
     },
     3: {
         "name": "Headphones",
-        "price": 5000,
-        "image": "https://images.unsplash.com/photo-1518444065439-e933c06ce9cd?w=800"
+        "price": 2700,
+        "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800"
     },
     4: {
         "name": "Keyboard",
-        "price": 3000,
-        "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800"
+        "price": 1800,
+        "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800"
     },
     5: {
         "name": "Mouse",
-        "price": 1500,
-        "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800"
+        "price": 900,
+        "image": "https://images.unsplash.com/photo-1527814050087-3793815479db?w=800"
     }
 }
 
