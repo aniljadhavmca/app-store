@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1> My Store</h1>
+<div class="cart-icon" onclick="toggleCart()">
+My Cart <span id="cart-count">0</span>
+</div>
+</header>
+
+<div class="container">
+<div id="products" class="grid"></div>
+</div>
+
+<div id="overlay" class="overlay" onclick="toggleCart()"></div>
+
+<div id="cart-sidebar" class="cart-sidebar">
+<div class="cart-header">
+<h2>Your Cart</h2>
+<span class="close-btn" onclick="toggleCart()">✖</span>
+</div>
+
+<div id="cart-items"></div>
+<h3>Total: ₹<span id="cart-total">0</span></h3>
+
+<h3>Delivery Details</h3>
+<input id="cust_name" placeholder="Full Name">
+<input id="cust_email" placeholder="Email">
+<input id="cust_address" placeholder="Address">
+
+<button onclick="checkout()">Proceed to Checkout</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
