@@ -1,3 +1,11 @@
+#================
+# /home/ubuntu/storeapp/app.py
+# Replace:
+# YOUR_STRIPE_SECRET_KEY
+# YOUR_RDS_ENDPOINT
+# YOUR_ALB_DNS
+#================
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from sqlalchemy import create_engine, text
@@ -7,12 +15,21 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-stripe.api_key = "YOUR_STRIPE_SECRET"
+# ===============================
+# 🔑 STRIPE SECRET KEY
+# ===============================
+stripe.api_key = "YOUR_STRIPE_SECRET_KEY"
 
+# ===============================
+# 🗄 RDS DATABASE CONNECTION
+# ===============================
 engine = create_engine(
     "mysql+pymysql://admin:admin1234@YOUR_RDS_ENDPOINT:3306/storedb"
 )
 
+# ===============================
+# 🛍 PRODUCTS (WITH IMAGES)
+# ===============================
 PRODUCTS = {
     1: {
         "name": "Laptop",
@@ -41,12 +58,19 @@ PRODUCTS = {
     }
 }
 
+# ===============================
+# 🛒 GET PRODUCTS
+# ===============================
 @app.route("/api/products")
-def products():
+def get_products():
     return jsonify(PRODUCTS)
 
+# ===============================
+# 💳 STRIPE CHECKOUT
+# ===============================
 @app.route("/api/create-checkout-session", methods=["POST"])
 def checkout():
+
     data = request.json
     cart = data["cart"]
     customer = data["customer"]
@@ -76,6 +100,7 @@ def checkout():
         cancel_url="http://YOUR_ALB_DNS",
     )
 
+    # Store Order in DB
     with engine.connect() as conn:
         conn.execute(text("""
             INSERT INTO orders
@@ -93,6 +118,9 @@ def checkout():
 
     return jsonify({"url": session.url})
 
+# ===============================
+# 🧾 GET SINGLE ORDER
+# ===============================
 @app.route("/api/order/<session_id>")
 def get_order(session_id):
     with engine.connect() as conn:
@@ -102,8 +130,11 @@ def get_order(session_id):
 
     return jsonify(dict(order._mapping))
 
+# ===============================
+# 📊 GET ALL ORDERS
+# ===============================
 @app.route("/api/orders")
-def orders():
+def get_orders():
     with engine.connect() as conn:
         orders = conn.execute(text("""
             SELECT * FROM orders ORDER BY id DESC
@@ -111,5 +142,8 @@ def orders():
 
     return jsonify([dict(row._mapping) for row in orders])
 
+# ===============================
+# 🚀 RUN APP
+# ===============================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
