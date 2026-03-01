@@ -24,7 +24,7 @@ async function loadProducts(){
         <div class="card">
             <img src="${p.image}" class="product-img">
             <h3>${p.name}</h3>
-            <p class="price">Rs {p.price}</p>
+            <p class="price">Rs ${p.price}</p>
             <button onclick="addToCart(${id})">Add to Cart</button>
         </div>`;
     });
