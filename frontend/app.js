@@ -40,7 +40,7 @@ function addToCart(id){
     }
 
     updateCartUI();
-    showToast("✅ Item added to cart");
+    showToast("Item added to cart");
 }
 
 function updateCartUI(){
@@ -77,7 +77,7 @@ async function checkout(){
     const address=document.getElementById("cust_address").value;
 
     if(!name || !email || cart.length===0){
-        showToast("⚠ Fill delivery details & add items");
+        showToast(" Fill delivery details & add items");
         return;
     }
 
