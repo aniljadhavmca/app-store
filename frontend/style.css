@@ -115,7 +115,7 @@ cursor:pointer;
 /* Toast Popup */
 .toast {
 position:fixed;
-bottom:30px;
+top:20px;
 right:30px;
 background:#16a34a;
 color:white;
