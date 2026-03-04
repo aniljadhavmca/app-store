@@ -59,13 +59,14 @@ Configuration:
 - Public access: Yes (for learning)
 - Security Group: Allow MySQL (3306) from Backend EC2 security group
 
-Connect:
+Install & Connect:
 
 sudo apt install mariadb-server -y
 
 mysql -h YOUR_RDS_ENDPOINT -u admin -p
 
 -- Add this if the database doesn't exist yet
+
 CREATE DATABASE IF NOT EXISTS storedb;
 
 USE storedb;
@@ -96,6 +97,7 @@ Security Group:
 
 - Allow SSH (22) from your IP
 - Allow Port 5000 from ALB Security Group
+- Allow 3306 mySQL
 
 Install:
 
@@ -114,7 +116,7 @@ pip install flask flask-cors stripe sqlalchemy pymysql
 
 ## 3️⃣ Create Backend File
 
-Create:
+Create: or clone
 
 /home/ubuntu/storeapp/app.py
 
@@ -149,7 +151,6 @@ If JSON returns → backend working.
 # PART 3 — BACKEND AUTO START
 
 Create service:
-
 sudo nano /etc/systemd/system/storeapp.service
 
 Paste:
