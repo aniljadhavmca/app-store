@@ -61,6 +61,8 @@ Configuration:
 
 Connect:
 
+sudo apt install mariadb-server -y
+
 mysql -h YOUR_RDS_ENDPOINT -u admin -p
 
 -- Add this if the database doesn't exist yet
