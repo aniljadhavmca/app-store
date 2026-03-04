@@ -63,22 +63,24 @@ Connect:
 
 mysql -h YOUR_RDS_ENDPOINT -u admin -p
 
-Create table:
+-- Add this if the database doesn't exist yet
+CREATE DATABASE IF NOT EXISTS storedb;
 
 USE storedb;
 
 DROP TABLE IF EXISTS orders;
 
-CREATE TABLE orders (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_name VARCHAR(100),
-    customer_email VARCHAR(100),
-    address TEXT,
-    total_amount INT,
-    items TEXT,
-    stripe_session_id VARCHAR(200),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE orders ( 
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    customer_name VARCHAR(100), 
+    customer_email VARCHAR(100), 
+    address TEXT, 
+    total_amount INT, 
+    items TEXT, 
+    stripe_session_id VARCHAR(200), 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
+
 
 Exit MySQL.
 
