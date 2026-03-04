@@ -195,7 +195,9 @@ sudo apt install git -y
 
 Go to:
 
-cd /var/www/html  
+cd /var/www/html  or git clone
+
+mv frontend/* . (run command from /var/www/html to get all from front-endfolder )
 
 Create files:
 
