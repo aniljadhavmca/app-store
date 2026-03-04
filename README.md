@@ -191,6 +191,7 @@ Install nginx:
 
 sudo apt update  
 sudo apt install nginx -y  
+sudo apt install git -y
 
 Go to:
 
