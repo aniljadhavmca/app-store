@@ -196,7 +196,11 @@ sudo apt install git -y
 
 Go to:
 
-cd /var/www/html  or git clone
+cd /var/www/html and git clone
+
+mv /var/www/html/app-store/frontend/{.,}* /var/www/html
+
+OR as you needed
 
 mv frontend/* . (run command from /var/www/html to get all from front-endfolder )
 
