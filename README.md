@@ -61,7 +61,8 @@ Configuration:
 
 Install & Connect:
 
-sudo apt install mariadb-server -y
+sudo apt update
+sudo apt install mysql-client -y
 
 mysql -h YOUR_RDS_ENDPOINT -u admin -p
 
