@@ -50,58 +50,51 @@ Application Load Balancer (HTTP:80)
 
 ## 1️⃣ Create RDS MySQL
 
-Configuration:
+This guide covers the installation, connection, and schema setup for your Amazon RDS MySQL instance.
 
-- Engine: MySQL
-- Database name: storedb
-- Username: admin
-- Password: admin1234
-- Public access: Yes (for learning)
-- Security Group: Allow MySQL (3306) from Backend EC2 security group
+---
 
-Install & Connect:
+## 1️⃣ RDS Configuration
+Ensure your RDS instance is configured with the following settings in the AWS Console:
 
+- **Engine:** MySQL (Community)
+- **Instance Identifier:** `stripe-db`
+- **Initial Database Name:** `storedb`
+- **Username:** `admin`
+- **Password:** `admin1234`
+- **Public Access:** Yes (for learning/dev)
+- **Security Group:** Allow Inbound **TCP Port 3306** from your EC2 Security Group or My IP.
+
+---
+
+## 2️⃣ Install & Connect
+Run these commands on your Ubuntu instance to install the MySQL client and connect to your RDS endpoint.
+
+```bash
+# Update package list
 sudo apt update
+
+# Install MySQL Client
 sudo apt install mysql-client -y
 
+# Connect to RDS (Replace YOUR_RDS_ENDPOINT with your actual endpoint)
 mysql -h YOUR_RDS_ENDPOINT -u admin -p
 
--- Add this if the database doesn't exist yet
-
-CREATE DATABASE IF NOT EXISTS storedb;
-
-USE storedb;
-
-DROP TABLE IF EXISTS orders;
-
-CREATE TABLE orders ( 
-    id INT AUTO_INCREMENT PRIMARY KEY, 
-    customer_name VARCHAR(100), 
-    customer_email VARCHAR(100), 
-    address TEXT, 
-    total_amount INT, 
-    items TEXT, 
-    stripe_session_id VARCHAR(200), 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
-);
-
-
-Exit MySQL.
-
+```
 ---
 
 # PART 2 — BACKEND EC2 SETUP
 
 ## 2️⃣ Create Backend EC2
 
-Security Group:
+# Security Group:
 
 - Allow SSH (22) from your IP
 - Allow Port 5000 from ALB Security Group
 - Allow 3306 mySQL
 
 Install:
-
+```bash
 sudo apt update  
 sudo apt install python3-venv python3-pip -y  
 
@@ -112,7 +105,7 @@ python3 -m venv venv
 source venv/bin/activate  
 
 pip install flask flask-cors stripe sqlalchemy pymysql  
-
+```
 ---
 
 ## 3️⃣ Create Backend File
@@ -271,7 +264,10 @@ stripe.api_key = "sk_test_YOUR_SECRET_KEY"
 
 ## Stripe Test Card
 
-4242 4242 4242 4242  
+```bash
+4242 4242 4242 4242
+```
+
 Any future expiry  
 Any CVC  
 Any ZIP  
