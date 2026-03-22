@@ -81,6 +81,36 @@ sudo apt install mysql-client -y
 mysql -h YOUR_RDS_ENDPOINT -u admin -p
 
 ```
+
+## Create Database and Table
+
+```bash
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS storedb;
+
+-- Switch to the database
+USE storedb;
+
+-- Drop table if it exists (Warning: This deletes existing data)
+DROP TABLE IF EXISTS orders;
+
+-- Create the orders table
+CREATE TABLE orders ( 
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    customer_name VARCHAR(100), 
+    customer_email VARCHAR(100), 
+    address TEXT, 
+    total_amount INT, 
+    items TEXT, 
+    stripe_session_id VARCHAR(200), 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+);
+
+-- Exit the MySQL shell
+```
+EXIT;
+
+
 ---
 
 # PART 2 — BACKEND EC2 SETUP
